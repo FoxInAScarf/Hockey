@@ -1,0 +1,7 @@
+main: com.hockey.veo.Main
+name: HockeyPlugin
+version: 1.0.0
+commands:
+  hockey:
+    aliases: [hcky]
+    description: Hockey plugin initiator command!
