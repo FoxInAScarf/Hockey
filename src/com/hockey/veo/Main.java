@@ -2,7 +2,6 @@ package com.hockey.veo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,9 +11,8 @@ public class Main extends JavaPlugin {
 
     public static boolean running = false;
     public static Puck puck;
-    public static HashMap<Player, ArmorStand> ps = new HashMap<>();
     public static HashMap<Player, Location> pl = new HashMap<>();
-    public static HashMap<Player, Double> pd = new HashMap<>();
+    public static HashMap<Player, Float> pp = new HashMap<>();
     private static Main main;
 
     public void onEnable() {
@@ -45,7 +43,7 @@ public class Main extends JavaPlugin {
     public static boolean isInRect(Location p, Location e0, Location e1) {
 
         if (p.getX() >= e0.getX() && p.getX() <= e1.getX())
-            if (p.getZ() >= e0.getZ() && p.getZ() <= e1.getZ()) return true;
+            return p.getZ() >= e0.getZ() && p.getZ() <= e1.getZ();
 
         return false;
 

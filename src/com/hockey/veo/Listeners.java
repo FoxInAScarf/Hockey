@@ -1,5 +1,6 @@
 package com.hockey.veo;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -17,55 +18,33 @@ public class Listeners implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR))
-            if (Main.running
-                &&
-                p.getNearbyEntities(3, 3, 3).contains(Main.puck.getEntity())) {
+            if (p.getNearbyEntities(3, 3, 3).contains(Main.puck.getEntity()) && Main.running) {
 
-                double d = Math.sqrt(
+                if (p.getLocation().getPitch() >= -20 && Main.pp.get(p) - p.getLocation().getPitch() > 0) {
 
-                    Math.pow(Main.puck.getLocation().getX() - Main.ps.get(p).getLocation().getX(), 2)
-                    +
-                    Math.pow(Main.puck.getLocation().getZ() - Main.ps.get(p).getLocation().getZ(), 2)
-
-                );
-
-                if (d < Main.pd.get(p)) {
-
-                    double ratio = Math.abs(d - Main.pd.get(p)) / Main.pd.get(p) * 10,
+                    double d = (Main.pp.get(p) - p.getLocation().getPitch()) / Main.pp.get(p) * 10,
                             theta = Math.atan2(
                                     (Main.puck.getLocation().getX() - p.getLocation().getX()),
                                     (Main.puck.getLocation().getZ() - p.getLocation().getZ())
                             );
-                    Main.puck.shoot(Math.toDegrees(theta), ratio);
-                    p.sendMessage("" + ratio);
+                    Main.puck.shoot(Math.toDegrees(theta), d);
 
                 }
 
-                Main.pd.put(p, d);
+                Main.pp.put(p, p.getLocation().getPitch());
+                Main.pl.put(p, p.getLocation());
 
             }
 
+
         if (e.getAction().equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))
-            if (p.getNearbyEntities(3, 3, 3).contains(Main.puck.getEntity())) {
+            if (p.getNearbyEntities(3, 3, 3).contains(Main.puck.getEntity()) && Main.running) {
 
-            Main.puck.slow(85);
-            e.setCancelled(true);
+                Main.puck.slow(85);
+                e.setCancelled(true);
 
-        }
+            }
 
-
-    }
-
-    @EventHandler
-    public void onMove(PlayerMoveEvent e) {
-
-        /*Player p = e.getPlayer();
-
-        double theta = Math.atan2(
-                (Main.puck.getLocation().getX() - p.getLocation().getX()),
-                (Main.puck.getLocation().getZ() - p.getLocation().getZ())
-        );
-        p.sendMessage((Math.toDegrees(theta) + 180) + "");*/
 
     }
 
