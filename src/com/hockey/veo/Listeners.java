@@ -22,12 +22,22 @@ public class Listeners implements Listener {
 
                 if (p.getLocation().getPitch() >= -20 && Main.pp.get(p) - p.getLocation().getPitch() > 0) {
 
+                    double av = Math.sqrt(
+
+                            Math.pow(Main.pl.get(p).getX() - p.getLocation().getX(), 2)
+                            +
+                            Math.pow(Main.pl.get(p).getY() - p.getLocation().getY(), 2)
+                            +
+                            Math.pow(Main.pl.get(p).getZ() - p.getLocation().getZ(), 2)
+
+                    );
+
                     double d = (Main.pp.get(p) - p.getLocation().getPitch()) / Main.pp.get(p) * 10,
                             theta = Math.atan2(
                                     (Main.puck.getLocation().getX() - p.getLocation().getX()),
                                     (Main.puck.getLocation().getZ() - p.getLocation().getZ())
                             );
-                    Main.puck.shoot(Math.toDegrees(theta), d);
+                    Main.puck.shoot(Math.toDegrees(theta), av + d);
 
                 }
 
