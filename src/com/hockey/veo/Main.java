@@ -13,6 +13,8 @@ public class Main extends JavaPlugin {
     public static boolean running = false;
     public static Puck puck;
     public static HashMap<Player, ArmorStand> ps = new HashMap<>();
+    public static HashMap<Player, Location> pl = new HashMap<>();
+    public static HashMap<Player, Double> pd = new HashMap<>();
     private static Main main;
 
     public void onEnable() {

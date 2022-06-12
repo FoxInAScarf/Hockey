@@ -84,9 +84,19 @@ public class Puck {
 
     public void shoot(double theta, double v) {
 
-        vx = Math.sin(Math.toRadians(theta)) * v;
-        vz = Math.cos(Math.toRadians(theta)) * v;
+        vx += Math.sin(Math.toRadians(theta)) * v;
+        vz += Math.cos(Math.toRadians(theta)) * v;
 
     }
+
+    public void slow(double p) {
+
+        vx -= vx * p / 100;
+        vz -= vz * p / 100;
+
+    }
+
+    public Location getLocation() { return mite.getLocation(); }
+    public Entity getEntity() { return mite; }
 
 }
