@@ -23,7 +23,13 @@ public class Hockey implements CommandExecutor {
         // start
 
         for (Player p : Bukkit.getOnlinePlayers()) Main.pp.put(p, 90.0F);
-        for (Player p : Bukkit.getOnlinePlayers()) Main.pl.put(p, p.getLocation());
+
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
+
+            for (Player p : Bukkit.getOnlinePlayers()) Main.pl.put(p, p.getLocation());
+
+        }, 0L, 1L);
 
         return false;
 
