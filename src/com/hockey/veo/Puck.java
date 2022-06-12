@@ -22,6 +22,8 @@ public class Puck {
         mite.setSilent(true);
         mite.setAI(false);
         mite.setCollidable(false);
+        mite.setCustomName("puck");
+        mite.setCustomNameVisible(false);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
 
@@ -84,8 +86,8 @@ public class Puck {
 
     public void shoot(double theta, double v) {
 
-        vx += Math.sin(Math.toRadians(theta)) * v;
-        vz += Math.cos(Math.toRadians(theta)) * v;
+        vx = Math.sin(Math.toRadians(theta)) * v;
+        vz = Math.cos(Math.toRadians(theta)) * v;
 
     }
 
