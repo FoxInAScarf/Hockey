@@ -2,11 +2,17 @@ package com.hockey.veo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
 
 public class Main extends JavaPlugin {
 
-    public boolean running = false;
+    public static boolean running = false;
+    public static Puck puck;
+    public static HashMap<Player, ArmorStand> ps = new HashMap<>();
     private static Main main;
 
     public void onEnable() {
@@ -35,8 +41,6 @@ public class Main extends JavaPlugin {
     public static Main getInstance() { return main; }
 
     public static boolean isInRect(Location p, Location e0, Location e1) {
-
-        // debug this
 
         if (p.getX() >= e0.getX() && p.getX() <= e1.getX())
             if (p.getZ() >= e0.getZ() && p.getZ() <= e1.getZ()) return true;

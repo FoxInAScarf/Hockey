@@ -25,53 +25,58 @@ public class Puck {
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
 
-            // check block collision
+            if (vx != 0 || vz != 0) {
 
-            Location l0 = mite.getLocation().add(Math.abs(vx) * f / 20, 0, 0),
-                    l1 = mite.getLocation().subtract(Math.abs(vx) * f / 20, 0, 0),
-                    l2 = mite.getLocation().add(0, 0, Math.abs(vz) * f / 20),
-                    l3 = mite.getLocation().subtract(0, 0, Math.abs(vz) * f / 20);
+                // check block collision
 
-            if (l0.getBlock().getType() != Material.AIR
-                ||
-                l1.getBlock().getType() != Material.AIR) vx *= (-1);
-            if (l2.getBlock().getType() != Material.AIR
-                ||
-                l3.getBlock().getType() != Material.AIR) vz *= (-1);
+                Location l0 = mite.getLocation().add(Math.abs(vx) * f / 20, 0, 0),
+                        l1 = mite.getLocation().subtract(Math.abs(vx) * f / 20, 0, 0),
+                        l2 = mite.getLocation().add(0, 0, Math.abs(vz) * f / 20),
+                        l3 = mite.getLocation().subtract(0, 0, Math.abs(vz) * f / 20);
 
-            // check player collision
+                if (l0.getBlock().getType() != Material.AIR
+                        ||
+                        l1.getBlock().getType() != Material.AIR) vx *= (-1);
+                if (l2.getBlock().getType() != Material.AIR
+                        ||
+                        l3.getBlock().getType() != Material.AIR) vz *= (-1);
 
-            for (Entity e : mite.getNearbyEntities(vx * f / 20, 1, vz * f / 20))
-                if (e instanceof Player) {
+                // check player collision
 
-                    e.sendMessage("u in");
-                    Location pe0 = new Location(e.getWorld(),
-                                    e.getLocation().getX() - 0.3,
-                                    e.getLocation().getY(),
-                                    e.getLocation().getZ() - 0.3),
-                            pe1 = new Location(e.getWorld(),
-                                    e.getLocation().getX() - 0.3,
-                                    e.getLocation().getY(),
-                                    e.getLocation().getZ() - 0.3);
-                    if (Main.isInRect(l0, pe0, pe1) || Main.isInRect(l1, pe0, pe1)) {vx *= (-1);e.sendMessage("parallel to Z");}
-                    if (Main.isInRect(l2, pe0, pe1) || Main.isInRect(l3, pe0, pe1)) {vz *= (-1);e.sendMessage("parallel to X");}
+                for (Entity e : mite.getNearbyEntities(vx * f / 20, 1, vz * f / 20))
+                    if (e instanceof Player) {
 
-                    // FIX THIS ZRAPHY!!!!
+                        Location pe0 = new Location(e.getWorld(),
+                                e.getLocation().getX() - 0.5,
+                                e.getLocation().getY(),
+                                e.getLocation().getZ() - 0.5),
+                                pe1 = new Location(e.getWorld(),
+                                        e.getLocation().getX() + 0.5,
+                                        e.getLocation().getY(),
+                                        e.getLocation().getZ() + 0.5);
+                        if (Main.isInRect(l0, pe0, pe1) || Main.isInRect(l1, pe0, pe1)) {
+                            vx *= (-1);
+                        }
+                        if (Main.isInRect(l2, pe0, pe1) || Main.isInRect(l3, pe0, pe1)) {
+                            vz *= (-1);
+                        }
 
-                }
+                    }
 
-            // move
+                // move
 
-            mite.setTicksLived(1);
-            mite.teleport(new Location(mite.getWorld(),
-                    mite.getLocation().getX() + vx * f / 20,
-                    mite.getLocation().getY(),
-                    mite.getLocation().getZ() + vz * f / 20));
+                mite.setTicksLived(1);
+                mite.teleport(new Location(mite.getWorld(),
+                        mite.getLocation().getX() + vx * f / 20,
+                        mite.getLocation().getY(),
+                        mite.getLocation().getZ() + vz * f / 20));
 
-            // friction
+                // friction
 
-            vx -= (vx >= 0 ? df : -df);
-            vz -= (vz >= 0 ? df : -df);
+                vx -= (vx >= 0 ? df : -df);
+                vz -= (vz >= 0 ? df : -df);
+
+            }
 
         }, 0L, f);
 
