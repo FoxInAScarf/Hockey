@@ -71,7 +71,7 @@ public class Puck {
 
                 // friction
 
-                slow(3);
+                slow(5);
 
             }
 
@@ -81,8 +81,8 @@ public class Puck {
 
     public void shoot(double theta, double v) {
 
-        vx = Math.sin(Math.toRadians(theta)) * v / 20;
-        vz = Math.cos(Math.toRadians(theta)) * v / 20;
+        vx = Math.sin(Math.toRadians(theta)) * v;
+        vz = Math.cos(Math.toRadians(theta)) * v;
 
         // division by 20 is necessary to convert from BPS (block per second) to BPT (block per tick)
 

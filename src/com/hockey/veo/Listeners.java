@@ -1,16 +1,10 @@
 package com.hockey.veo;
 
-import net.minecraft.server.v1_16_R3.Particles;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 
 public class Listeners implements Listener {
 
@@ -34,7 +28,7 @@ public class Listeners implements Listener {
 
                     );
 
-                    double d = (Main.pp.get(p) - p.getLocation().getPitch()) / Main.pp.get(p) * 10,
+                    double d = (Main.pp.get(p) - p.getLocation().getPitch()) / Main.pp.get(p)/* * 20*/,
                             theta = Math.atan2(
                                     (Main.puck.getLocation().getX() - p.getLocation().getX()),
                                     (Main.puck.getLocation().getZ() - p.getLocation().getZ())
