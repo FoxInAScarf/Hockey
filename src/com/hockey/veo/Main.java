@@ -42,6 +42,12 @@ public class Main extends JavaPlugin {
 
     }
 
+    public void onDisable() {
+
+        if (running) puck.getEntity().remove();
+
+    }
+
     public static Main getInstance() { return main; }
 
     public static boolean isInRect(Location p, Location e0, Location e1) {
