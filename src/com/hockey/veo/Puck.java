@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 public class Puck {
 
     private double vx = 0, vz = 0;
-    private final double df = 0.01, sink = 0.82;
+    private final double df = 0.98, sink = 0.82;
     private final long f = 1L;
     private ArmorStand stand;
 
@@ -71,8 +71,10 @@ public class Puck {
 
                 // friction
 
-                vx -= (vx >= 0 ? df : -df);
-                vz -= (vz >= 0 ? df : -df);
+                /*vx = (vx >= 0 ? (Math.abs(vx) * df) : -(Math.abs(vx) * df));
+                vz = (vz >= 0 ? (Math.abs(vz) * df) : -(Math.abs(vz) * df));*/
+
+                slow(3);
 
             }
 

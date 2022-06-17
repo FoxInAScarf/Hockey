@@ -59,7 +59,6 @@ public class Hockey implements CommandExecutor {
                             Main.puck.getLocation().getX() + Math.sin(theta) * i,
                             Main.puck.getLocation().getY() + 0.3,
                             Main.puck.getLocation().getZ() + Math.cos(theta) * i);
-                    ZParticle p =
                     new ZParticle(Particles.FLAME, l, 1, new double[]{0.01, 0.01, 0.01}).playParticle(false, p);
 
                 }
